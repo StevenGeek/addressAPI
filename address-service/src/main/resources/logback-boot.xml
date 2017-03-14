@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+  
+<configuration scan="true" scanPeriod="60 seconds" >  
+<!-- 	<property> -->
+<!-- 		<name>myContextName</name> -->
+<!-- 		<value>addressAPI</value> -->
+<!-- 	</property> -->
+<!-- 	<contextName>${myContextName}</contextName> -->
+	<timestamp key="bySecond" datePattern="yyyy-MM-dd'T'HH:mm:ss"> </timestamp>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">  
+        <encoder>  
+            <pattern>%d{yyyy-M-d HH:mm:ss} %t %p %m%n</pattern>  
+        </encoder>  
+    </appender>  
+    <appender name="springboot"  
+        class="ch.qos.logback.core.rolling.RollingFileAppender">  
+        <!-- <Encoding>UTF-8</Encoding> -->  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+            <FileNamePattern>logs/logback/springboot_%d{yyyy-M-d}.log  
+            </FileNamePattern>  
+            <MaxHistory>10</MaxHistory>  
+        </rollingPolicy>  
+        <encoder>  
+            <pattern>%d{yyyy-M-d HH:mm:ss} %t %p %m%n</pattern>  
+        </encoder>  
+    </appender>  
+    <appender name="smile"  
+        class="ch.qos.logback.core.rolling.RollingFileAppender">  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+            <FileNamePattern>logs/logback/smile_%d{yyyy-M-d}.log  
+            </FileNamePattern>  
+            <MaxHistory>10</MaxHistory>  
+        </rollingPolicy>  
+        <encoder>  
+            <pattern>%d{yyyy-M-d HH:mm:ss} %t %p %m%n</pattern>  
+        </encoder>  
+    </appender>  
+  	<appender name="sql" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  		<encoder>
+  			<pattern>%d{yyyy-M-d HH:mm:ss} %t %p %m%n</pattern>
+  		</encoder>
+  		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+  			<FileNamePattern>logs/logback/springsql_%d{yyyy-M-d}.log</FileNamePattern>
+        </rollingPolicy>  
+  	</appender>
+    <logger name="org.springframework.boot" level="debug"  
+        additivity="false">  
+        <appender-ref ref="springboot" />  
+    </logger>  
+    <!-- name包必须能够扫描到所以类，包括启动类 -->  
+    <logger name="com.service" level="debug" additivity="false">  
+        <appender-ref ref="smile" />  
+    </logger>  
+    <logger name="jdbc.sqlonly" level="WARN" appender-ref="sql"/>  
+	<logger name="jdbc.sqltiming" level="INFO"/>  
+	<logger name="jdbc.resultsettable" level="INFO"/>  
+	<logger name="jdbc.resultset" level="WARN"/>  
+	<logger name="jdbc.connection" level="WARN"/>  
+	<logger name="jdbc.audit" level="WARN"/> 
+    <root level="debug">  
+        <appender-ref ref="stdout" />  
+    </root>  
+</configuration>    
