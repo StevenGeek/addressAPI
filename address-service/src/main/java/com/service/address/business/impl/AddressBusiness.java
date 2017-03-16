@@ -18,6 +18,7 @@ import com.service.address.orm.bean.baidu.response.base.impl.BaiDuAddressQueryRe
 import com.service.address.orm.bean.baidu.response.base.impl.BaiDuAddressQueryRevertResult.AddressComponent;
 import com.service.address.orm.dao.CityRepository;
 import com.service.address.properties.BaiDuProperties;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 import com.service.web.util.BeanListUtil;
 import com.service.web.util.baidu.api.BaiduApi;
@@ -58,12 +59,12 @@ public class AddressBusiness implements IAddressBusiness {
 
     @Override
     public CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
-            InvocationTargetException, IOException, ParameterException {
+            InvocationTargetException, IOException, ParameterException, InfoException {
         // 根据地址解析对应经纬度信息
         BaiduBaseResponse<BaiDuAddressQueryResult> resultBean = BaiduApi.fuzzyQueryCity(p_address, c_BaiDuProperties.getAddress2location());
         // 判断查询结果状态，不为0则抛异常
         if (!"0".equals(resultBean.getStatus())) {
-            throw new ParameterException("查询不到该地址");
+            throw new InfoException("查询不到该地址");
         }
         // 逆向解析地址所在区域
         BaiduBaseResponse<BaiDuAddressQueryRevertResult> revertResultBean = BaiduApi.fuzzyRevertQueryCity(resultBean, c_BaiDuProperties.getAddress2location());

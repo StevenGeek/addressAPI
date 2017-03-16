@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.service.address.business.impl.AddressBusiness;
 import com.service.address.orm.bean.CityBean;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +29,7 @@ public class AddressServiceTest {
 
     @Test
     public void testBaiduAddressQuery() throws IOException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
-            InvocationTargetException, ParameterException {
+            InvocationTargetException, ParameterException, InfoException {
         c_addressService.fuzzyQueryCityInfo("龙耀路");
     }
 }

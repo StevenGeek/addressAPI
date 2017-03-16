@@ -20,6 +20,7 @@ import org.springframework.context.MessageSource;
 
 import com.service.web.ResponseEntity;
 import com.service.web.exception.BaseException;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 import com.service.web.util.JsonUtil;
 
@@ -98,7 +99,8 @@ public class MyFilter implements Filter {
 
         {
             logger.error(e.getMessage(), e);
-            Throwable cause = e.getCause() instanceof BaseException || e.getCause() instanceof ParameterException ? e.getCause() : e;
+            Throwable cause = e.getCause() instanceof BaseException || e.getCause() instanceof ParameterException || e.getCause() instanceof InfoException
+                    ? e.getCause() : e;
             writerError(response, ResponseEntity.getEntityError(cause, Locale.SIMPLIFIED_CHINESE, messageSource));
         }
 

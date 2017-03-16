@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.service.address.orm.bean.CityBean;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 
 /**
@@ -51,9 +52,10 @@ public interface IAddressBusiness {
      * @throws SecurityException
      * @throws NoSuchMethodException
      * @throws ParameterException
+     * @throws InfoException
      */
     CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
-            InvocationTargetException, IOException, ParameterException;
+            InvocationTargetException, IOException, ParameterException, InfoException;
 
     /**
      * 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.service.address.business.IAddressBusiness;
 import com.service.web.ResponseEntity;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 
 /**
@@ -37,7 +38,7 @@ public class AddressController {
 
     @RequestMapping("info/vague")
     public ResponseEntity fuzzyQueryCityInfo(@RequestParam(required = false, value = "address") String p_address) throws NoSuchMethodException,
-            SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, ParameterException {
+            SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, ParameterException, InfoException {
         return ResponseEntity.getEntity(c_addressBusiness.fuzzyQueryCityInfo(p_address));
     }
 }
