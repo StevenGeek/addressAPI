@@ -36,10 +36,12 @@ public class AddressBusiness implements IAddressBusiness {
 
     @Override
     public List<CityBean> queryNextCityList(String p_parentId, String p_grade) throws InstantiationException, IllegalAccessException, ParameterException {
+        // 若有父级Id，则查询下级城市列表
         if (!StringUtils.isEmpty(p_parentId)) {
             List<CityBean> m_cityBeans = new ArrayList<>();
             m_cityBeans = BeanListUtil.getList(c_cityRepository.findByParentId(p_parentId), CityBean.class);
             return m_cityBeans;
+            // 若无则查询省级列表
         } else if (!StringUtils.isEmpty(p_grade)) {
             return BeanListUtil.getList(c_cityRepository.findByGrade(p_grade), CityBean.class);
         } else {
@@ -50,22 +52,28 @@ public class AddressBusiness implements IAddressBusiness {
     @Override
     public CityBean queryCity(String p_cityId) {
         CityBean m_cityBean = new CityBean();
-        BeanUtils.copyProperties(c_cityRepository.findById(p_cityId), m_cityBean);
+        BeanUtils.copyProperties(c_cityRepository.findByCityId(p_cityId), m_cityBean);
         return m_cityBean;
     }
 
     @Override
     public CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, IOException, ParameterException {
+        // 根据地址解析对应经纬度信息
         BaiduBaseResponse<BaiDuAddressQueryResult> resultBean = BaiduApi.fuzzyQueryCity(p_address, c_BaiDuProperties.getAddress2location());
+        // 判断查询结果状态，不为0则抛异常
         if (!"0".equals(resultBean.getStatus())) {
-            throw new ParameterException("aa");
+            throw new ParameterException("查询不到该地址");
         }
+        // 逆向解析地址所在区域
         BaiduBaseResponse<BaiDuAddressQueryRevertResult> revertResultBean = BaiduApi.fuzzyRevertQueryCity(resultBean, c_BaiDuProperties.getAddress2location());
         AddressComponent addressComponent = revertResultBean.getResult().getAddressComponent();
+        // 根据解析出的区域Id，到地址库查询详细信息
         CityBean cityBean = queryCity(addressComponent.getAbcode());
+        // 查询完整的三级地址信息
         CityBean completeAddress = queryCompleteCityInfo(cityBean);
-        completeAddress.setCompleteAddress(p_address);
+        // 将完整地址信息也返回
+        completeAddress.setCompleteAddress(revertResultBean.getResult().getFormatted_address());
         return completeAddress;
     }
 
