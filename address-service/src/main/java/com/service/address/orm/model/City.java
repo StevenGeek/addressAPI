@@ -1,89 +1,107 @@
 package com.service.address.orm.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the city database table.
  * 
  */
 @Entity
-@NamedQuery(name="City.findAll", query="SELECT c FROM City c")
+@NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
 public class City implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	private String id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@Column(name="city_name")
-	private String cityName;
+    @Column(name = "city_id")
+    private String cityId;
 
-	private String grade;
+    @Column(name = "city_name")
+    private String cityName;
 
-	@Column(name="parent_id")
-	private String parentId;
+    private String grade;
 
-	@Column(name="simple_spell")
-	private String simpleSpell;
+    @Column(name = "parent_id")
+    private String parentId;
 
-	private String spell;
+    @Column(name = "simple_spell")
+    private String simpleSpell;
 
-	public City() {
-	}
+    private String spell;
 
-	public String getId() {
-		return this.id;
-	}
+    public City() {
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public String getCityName() {
-		return this.cityName;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+    public String getCityName() {
+        return this.cityName;
+    }
 
-	public String getGrade() {
-		return this.grade;
-	}
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
+    public String getGrade() {
+        return this.grade;
+    }
 
-	public String getParentId() {
-		return this.parentId;
-	}
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
+    public String getParentId() {
+        return this.parentId;
+    }
 
-	public String getSimpleSpell() {
-		return this.simpleSpell;
-	}
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setSimpleSpell(String simpleSpell) {
-		this.simpleSpell = simpleSpell;
-	}
+    public String getSimpleSpell() {
+        return this.simpleSpell;
+    }
 
-	public String getSpell() {
-		return this.spell;
-	}
+    public void setSimpleSpell(String simpleSpell) {
+        this.simpleSpell = simpleSpell;
+    }
 
-	public void setSpell(String spell) {
-		this.spell = spell;
-	}
+    public String getSpell() {
+        return this.spell;
+    }
 
-	@Override
-	public String toString() {
-		return "City [id=" + id + ", cityName=" + cityName + ", grade=" + grade + ", parentId=" + parentId
-				+ ", simpleSpell=" + simpleSpell + ", spell=" + spell + "]";
-	}
+    public void setSpell(String spell) {
+        this.spell = spell;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    @Override
+    public String toString() {
+        return "City [id=" + id + ", cityName=" + cityName + ", grade=" + grade + ", parentId=" + parentId + ", simpleSpell=" + simpleSpell + ", spell=" + spell
+                + "]";
+    }
 
 }

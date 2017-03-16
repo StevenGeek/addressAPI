@@ -14,9 +14,13 @@ public class CityBean implements Serializable {
      */
     private static final long serialVersionUID = -1540306193720623L;
     /**
-     * 城市编码
+     * 主键
      */
-    private String id;
+    private Integer id;
+    /**
+     * 城市Id
+     */
+    private String cityId;
     /**
      * 城市名称
      */
@@ -51,7 +55,7 @@ public class CityBean implements Serializable {
      * @author steven
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -59,7 +63,7 @@ public class CityBean implements Serializable {
      * @author steven
      * @param id the id to set
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -172,6 +176,14 @@ public class CityBean implements Serializable {
 
     public void setCompleteAddress(String completeAddress) {
         this.completeAddress = completeAddress;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
 }
