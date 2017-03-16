@@ -1,5 +1,8 @@
 package com.service.address.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +33,11 @@ public class AddressController {
         } else {
             return ResponseEntity.getEntity(c_addressBusiness.queryCity(p_cityId));
         }
+    }
+
+    @RequestMapping("info/vague")
+    public ResponseEntity fuzzyQueryCityInfo(@RequestParam(required = false, value = "address") String p_address) throws NoSuchMethodException,
+            SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, ParameterException {
+        return ResponseEntity.getEntity(c_addressBusiness.fuzzyQueryCityInfo(p_address));
     }
 }
