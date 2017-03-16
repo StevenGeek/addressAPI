@@ -1,0 +1,12 @@
+2017-3-14 14:48:55 main INFO Starting AddressApplication on DESKTOP-DB5U7UD with PID 15336 (D:\NextEv\my-address-service\address-service\target\classes started by steven in D:\NextEv\my-address-service\address-service)
+2017-3-14 14:48:55 main DEBUG Running with Spring Boot v1.5.2.RELEASE, Spring v4.3.7.RELEASE
+2017-3-14 14:48:55 main INFO No active profile set, falling back to default profiles: default
+2017-3-14 14:49:03 main INFO Started AddressApplication in 8.034 seconds (JVM running for 8.659)
+2017-3-14 15:13:12 main INFO Starting AddressApplication on DESKTOP-DB5U7UD with PID 6944 (D:\NextEv\my-address-service\address-service\target\classes started by steven in D:\NextEv\my-address-service\address-service)
+2017-3-14 15:13:12 main DEBUG Running with Spring Boot v1.5.2.RELEASE, Spring v4.3.7.RELEASE
+2017-3-14 15:13:12 main INFO No active profile set, falling back to default profiles: default
+2017-3-14 15:13:18 main INFO Started AddressApplication in 6.2 seconds (JVM running for 7.003)
+2017-3-14 15:22:26 main INFO Starting AddressApplication on DESKTOP-DB5U7UD with PID 11440 (D:\NextEv\my-address-service\address-service\target\classes started by steven in D:\NextEv\my-address-service\address-service)
+2017-3-14 15:22:26 main DEBUG Running with Spring Boot v1.5.2.RELEASE, Spring v4.3.7.RELEASE
+2017-3-14 15:22:26 main INFO No active profile set, falling back to default profiles: default
+2017-3-14 15:22:35 main INFO Started AddressApplication in 9.96 seconds (JVM running for 10.575)
