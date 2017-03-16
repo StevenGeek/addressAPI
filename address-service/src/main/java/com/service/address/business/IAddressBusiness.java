@@ -1,5 +1,7 @@
 package com.service.address.business;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.service.address.orm.bean.CityBean;
@@ -34,4 +36,22 @@ public interface IAddressBusiness {
      * @return 城市信息
      */
     CityBean queryCity(String p_cityId);
+
+    /**
+     * 模糊地址搜索城市信息
+     * 
+     * @date 2017年3月15日
+     * @author steven
+     * @param p_address
+     * @return
+     * @throws IOException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
+     * @throws ParameterException
+     */
+    CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException, IOException, ParameterException;
 }
