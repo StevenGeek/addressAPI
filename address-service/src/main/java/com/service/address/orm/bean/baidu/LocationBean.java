@@ -1,4 +1,4 @@
-package com.service.address.orm.bean;
+package com.service.address.orm.bean.baidu;
 
 /**
  * 经纬度

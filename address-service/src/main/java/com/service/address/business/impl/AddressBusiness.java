@@ -57,16 +57,26 @@ public class AddressBusiness implements IAddressBusiness {
     @Override
     public CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, IOException, ParameterException {
-        BaiduBaseResponse<BaiDuAddressQueryResult> resultBean = BaiduApi.fuzzyQueryCity(p_address, c_BaiDuProperties.getAk(),
-                c_BaiDuProperties.getAddress2location());
+        BaiduBaseResponse<BaiDuAddressQueryResult> resultBean = BaiduApi.fuzzyQueryCity(p_address, c_BaiDuProperties.getAddress2location());
         if (!"0".equals(resultBean.getStatus())) {
             throw new ParameterException("aa");
         }
-        BaiduBaseResponse<BaiDuAddressQueryRevertResult> revertResultBean = BaiduApi.fuzzyRevertQueryCity(resultBean, c_BaiDuProperties.getAk(),
-                c_BaiDuProperties.getAddress2location());
+        BaiduBaseResponse<BaiDuAddressQueryRevertResult> revertResultBean = BaiduApi.fuzzyRevertQueryCity(resultBean, c_BaiDuProperties.getAddress2location());
         AddressComponent addressComponent = revertResultBean.getResult().getAddressComponent();
         CityBean cityBean = queryCity(addressComponent.getAbcode());
-        return cityBean;
+        CityBean completeAddress = queryCompleteCityInfo(cityBean);
+        completeAddress.setCompleteAddress(p_address);
+        return completeAddress;
+    }
+
+    @Override
+    public CityBean queryCompleteCityInfo(CityBean city) {
+        if (!StringUtils.isEmpty(city.getParentId())) {
+            CityBean parentCity = queryCity(city.getParentId());
+            parentCity.setNextCity(city);
+            return queryCompleteCityInfo(parentCity);
+        }
+        return city;
     }
 
 }

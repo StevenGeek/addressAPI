@@ -54,4 +54,15 @@ public interface IAddressBusiness {
      */
     CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, IOException, ParameterException;
+
+    /**
+     * 
+     * 根据城市查出所有上级城市
+     * 
+     * @date 2017年3月16日
+     * @author steven
+     * @param id 城市编码
+     * @return 城市业务类
+     */
+    CityBean queryCompleteCityInfo(CityBean city);
 }

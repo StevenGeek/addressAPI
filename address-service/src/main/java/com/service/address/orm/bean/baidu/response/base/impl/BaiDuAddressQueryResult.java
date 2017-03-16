@@ -2,7 +2,7 @@ package com.service.address.orm.bean.baidu.response.base.impl;
 
 import java.io.Serializable;
 
-import com.service.address.orm.bean.LocationBean;
+import com.service.address.orm.bean.baidu.LocationBean;
 
 /**
  * 百度地址查询结果类

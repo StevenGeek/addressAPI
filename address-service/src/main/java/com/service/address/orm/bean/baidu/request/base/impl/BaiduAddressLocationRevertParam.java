@@ -1,6 +1,6 @@
 package com.service.address.orm.bean.baidu.request.base.impl;
 
-import com.service.address.orm.bean.LocationBean;
+import com.service.address.orm.bean.baidu.LocationBean;
 import com.service.address.orm.bean.baidu.request.base.BaiDuAddressBaseReqParam;
 
 /**

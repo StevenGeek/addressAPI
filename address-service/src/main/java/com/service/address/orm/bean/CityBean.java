@@ -37,6 +37,14 @@ public class CityBean implements Serializable {
      * 全拼
      */
     private String spell;
+    /**
+     * 下级城市
+     */
+    private CityBean nextCity;
+    /**
+     * 完整地址
+     */
+    private String completeAddress;
 
     /**
      * 
@@ -148,6 +156,22 @@ public class CityBean implements Serializable {
     public String toString() {
         return "CityBean [id=" + id + ", cityName=" + cityName + ", grade=" + grade + ", parentId=" + parentId + ", simpleSpell=" + simpleSpell + ", spell="
                 + spell + "]";
+    }
+
+    public CityBean getNextCity() {
+        return nextCity;
+    }
+
+    public void setNextCity(CityBean nextCity) {
+        this.nextCity = nextCity;
+    }
+
+    public String getCompleteAddress() {
+        return completeAddress;
+    }
+
+    public void setCompleteAddress(String completeAddress) {
+        this.completeAddress = completeAddress;
     }
 
 }
