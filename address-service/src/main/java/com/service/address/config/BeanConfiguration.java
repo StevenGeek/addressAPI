@@ -1,4 +1,4 @@
-package com.service.address;
+package com.service.address.config;
 
 import javax.servlet.Filter;
 
