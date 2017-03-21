@@ -3,6 +3,7 @@ package com.service.web.util.baidu.api;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
@@ -17,10 +18,17 @@ import com.service.web.util.WebRequestUtil;
 @Component
 public class BaiduApi {
 
-    public static BaiduBaseResponse<BaiDuAddressQueryResult> fuzzyQueryCity(String p_address, String ak, String url)
+    private static String baiduAK;
+
+    @Value("${baidu.ak}")
+    private void setAK(String baiduAK) {
+        BaiduApi.baiduAK = baiduAK;
+    }
+
+    public static BaiduBaseResponse<BaiDuAddressQueryResult> fuzzyQueryCity(String p_address, String url)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
         BaiDuAddressLocationParam param = new BaiDuAddressLocationParam();
-        param.setAk(ak);
+        param.setAk(baiduAK);
         param.setAddress(p_address);
         param.setOutput("json");
         // param.setCity("上海市");
@@ -31,12 +39,11 @@ public class BaiduApi {
         return resultBean;
     }
 
-    public static BaiduBaseResponse<BaiDuAddressQueryRevertResult> fuzzyRevertQueryCity(BaiduBaseResponse<BaiDuAddressQueryResult> paramBean, String ak,
-            String url)
+    public static BaiduBaseResponse<BaiDuAddressQueryRevertResult> fuzzyRevertQueryCity(BaiduBaseResponse<BaiDuAddressQueryResult> paramBean, String url)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
         Gson gson = new Gson();
         BaiduAddressLocationRevertParam revertParam = new BaiduAddressLocationRevertParam();
-        revertParam.setAk(ak);
+        revertParam.setAk(baiduAK);
         revertParam.setOutput("json");
         revertParam.setPois("0");
         revertParam.setLocation(paramBean.getResult().getLocation());

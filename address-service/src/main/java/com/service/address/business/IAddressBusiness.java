@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.service.address.orm.bean.CityBean;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 
 /**
@@ -51,7 +52,19 @@ public interface IAddressBusiness {
      * @throws SecurityException
      * @throws NoSuchMethodException
      * @throws ParameterException
+     * @throws InfoException
      */
     CityBean fuzzyQueryCityInfo(String p_address) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
-            InvocationTargetException, IOException, ParameterException;
+            InvocationTargetException, IOException, ParameterException, InfoException;
+
+    /**
+     * 
+     * 根据城市查出所有上级城市
+     * 
+     * @date 2017年3月16日
+     * @author steven
+     * @param id 城市编码
+     * @return 城市业务类
+     */
+    CityBean queryCompleteCityInfo(CityBean city);
 }

@@ -2,7 +2,7 @@ package com.service.address.orm.bean.baidu.response.base.impl;
 
 import java.util.List;
 
-import com.service.address.orm.bean.LocationBean;
+import com.service.address.orm.bean.baidu.LocationBean;
 
 /**
  * 百度地图api逆向解析返回结果

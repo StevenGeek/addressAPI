@@ -18,5 +18,7 @@ public interface CityRepository extends JpaRepository<City, String> {
 
     List<City> findByGrade(String p_grade);
 
-    City findById(String p_id);
+    City findById(Integer p_id);
+
+    City findByCityId(String p_CityId);
 }

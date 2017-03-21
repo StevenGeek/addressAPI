@@ -14,6 +14,7 @@ import org.springframework.context.MessageSource;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.service.web.exception.BaseException;
 import com.service.web.exception.DefineException;
+import com.service.web.exception.InfoException;
 import com.service.web.exception.ParameterException;
 import com.service.web.exception.StateException;
 import com.service.web.util.ExceptionUtil;
@@ -32,6 +33,9 @@ public class ResponseEntity implements Serializable {
             return new ResponseEntity(false, e.getErrorCode(), MessageUtil.message(e.getErrorCode(), messageSource, local), null);
         } else if (ex instanceof ParameterException) {
             ParameterException pe = (ParameterException) ex;
+            return new ResponseEntity(false, pe.getErrorCode(), pe.getMessage(), null);
+        } else if (ex instanceof InfoException) {
+            InfoException pe = (InfoException) ex;
             return new ResponseEntity(false, pe.getErrorCode(), pe.getMessage(), null);
         } else if (ex instanceof StateException) {
             StateException m_StateException = (StateException) ex;
