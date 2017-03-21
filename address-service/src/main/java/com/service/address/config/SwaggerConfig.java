@@ -3,7 +3,11 @@ package com.service.address.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -12,7 +16,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     @Bean
     public Docket swaggerSpringBootPlugin() {
-        ApiInfo apiInfo = new ApiInfo("sample of spirngboot", "sample of spirngboot", null, null, "", null, null);
-        Docket = docket = new Docket(DocumentationType.)
+        Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
+                .apis(RequestHandlerSelectors.basePackage("com.service.address.controller")).paths(PathSelectors.any()).build();
+        return docket;
+    }
+
+    private ApiInfo apiInfo() {
+        String mail = "zhangyu.chen.o@nio.com";
+        return new ApiInfoBuilder().title("address api").description("Any questions, please email to <a href='mailTo:" + mail + "'>" + mail + "</a?>").build();
     }
 }

@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -132,7 +133,7 @@ public class WebRequestUtil {
      * @throws IOException
      */
     private static String readResponse(InputStream p_InputStream) throws IOException {
-        BufferedReader m_BufferedReader = new BufferedReader(new InputStreamReader(p_InputStream));
+        BufferedReader m_BufferedReader = new BufferedReader(new InputStreamReader(p_InputStream, "UTF-8"));
         String m_ReadLine = null;
         StringBuilder m_StringBuilder = new StringBuilder();
         while ((m_ReadLine = m_BufferedReader.readLine()) != null) {
@@ -195,16 +196,18 @@ public class WebRequestUtil {
         }
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            Method method = null;
-            Object value = null;
-            String name = field.getName();
-            StringBuilder getFieldMethodName = new StringBuilder("get").append(name.substring(0, 1).toUpperCase()).append(name.substring(1));
-            method = clazz.getMethod(getFieldMethodName.toString());
-            value = method.invoke(obj);
-            if (StringUtils.isEmpty(value)) {
-                continue;
+            if (!Modifier.isTransient(field.getModifiers())) {// 使用cobertura生成测试报告用到,跳过cobertura添加的跟踪属性
+                Method method = null;
+                Object value = null;
+                String name = field.getName();
+                StringBuilder getFieldMethodName = new StringBuilder("get").append(name.substring(0, 1).toUpperCase()).append(name.substring(1));
+                method = clazz.getMethod(getFieldMethodName.toString());
+                value = method.invoke(obj);
+                if (StringUtils.isEmpty(value)) {
+                    continue;
+                }
+                resultMap.put(name, value);
             }
-            resultMap.put(name, value);
         }
         return resultMap;
     }
